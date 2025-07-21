@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 const Resume = () => {
   return (
-    <div>Resume</div>
-  )
-}
+    <div className="text-start p-10">
+      <span className="text-3xl font-semibold aboutMe">Resume</span>
+      <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
+    </div>
+  );
+};
 
-export default Resume
+export default Resume;
