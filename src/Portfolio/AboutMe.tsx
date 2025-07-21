@@ -40,18 +40,18 @@ const AboutMe = () => {
     <div className="text-start p-10">
       <span className="text-3xl font-semibold aboutMe">About Me</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
-      <span >
+      <span>
         <p className="mt-2">
-          Hi, I'm Animish Chopade, a Full Stack Developer who loves building
-          user-friendly and efficient applications. I enjoy working on both the
-          frontend and backend, bringing ideas to life with modern tools and
-          technologies.
+          {`Hi, I'm Animish Chopade, a Full Stack Developer who loves building
+  user-friendly and efficient applications. I enjoy working on both the
+  frontend and backend, bringing ideas to life with modern tools and
+  technologies.`}
         </p>
         <p className="mt-2">
-          I'm always eager to learn, solve problems, and build projects that
-          make a difference. Whether it's improving functionality or enhancing
-          the user experience, I love taking on new challenges and growing as a
-          developer.
+          {`I'm always eager to learn, solve problems, and build projects that
+  make a difference. Whether it's improving functionality or enhancing
+  the user experience, I love taking on new challenges and growing as a
+  developer.`}
         </p>
       </span>
       <div className="mt-8">
