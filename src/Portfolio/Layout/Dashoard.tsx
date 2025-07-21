@@ -7,7 +7,7 @@ import Contact from "@/Portfolio/Contact";
 
 const Dashoard = () => {
   return (
-    <div className="w-[75rem] h-[80vh]  bg-zinc-900  text-white p-4 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
+    <div className="w-[75rem] h-auto  bg-zinc-900  text-white p-4 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
       <Tabs defaultValue="about" className="w-full h-full">
         <div className="top-0 right-0 absolute w-[28rem] h-12 ">
           <TabsList className="w-full h-full bg-zinc-800 rounded-t-3xl ">

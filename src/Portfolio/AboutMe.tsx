@@ -37,7 +37,7 @@ const AboutMe = () => {
   ];
 
   return (
-    <div className="text-start p-10">
+    <div className="text-start p-6 h-[76vh]">
       <span className="text-3xl font-semibold aboutMe">About Me</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <span>
