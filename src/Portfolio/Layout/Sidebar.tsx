@@ -31,7 +31,7 @@ const Sidebar = () => {
         <div className="border-t border-zinc-600 w-full max-w-56 my-4"></div>
 
         {/* Contact Information */}
-        <div className="flex flex-col gap-4 w-full px-2">
+        <div className="flex flex-col gap-4 w-full">
           <div className="flex items-center gap-3">
             <div className="flex-shrink-0">
               <Mail className="text-yellow-500 w-10 h-10 p-2.5 border border-zinc-600 rounded-lg box" />
