@@ -30,8 +30,6 @@ const Projects = () => {
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1741418427/Screenshot_2025-03-08_124729_p5hlln.png";
   const cloudinaryImage7 =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1745862541/c2e6db63-b364-4306-af5d-75c89fc6ae92.png";
-  const cloudinaryImage8 =
-    "https://res.cloudinary.com/dkv3bx51z/image/upload/v1745862554/ecfe1dc7-5b1f-4117-adc4-40d9912e5043.png";
   const anujBagade =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1752318121/anuj_work_mvr6zt.png";
 

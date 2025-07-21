@@ -9,7 +9,6 @@ import {
   Linkedin,
   Twitter,
   Instagram,
-  Facebook,
   Globe,
   Loader2,
 } from "lucide-react";
@@ -38,7 +37,9 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -46,7 +47,7 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -128,9 +129,9 @@ const Contact = () => {
             <CardHeader>
               <CardTitle className="text-2xl">Get In Touch</CardTitle>
               <CardDescription className="text-base">
-                I'm always interested in new opportunities and interesting
-                projects. Whether you have a question or just want to say hello,
-                feel free to reach out!
+                I`&lsquo;`m always interested in new opportunities and
+                interesting projects. Whether you have a question or just want
+                to say hello, feel free to reach out!
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -200,8 +201,8 @@ const Contact = () => {
           <CardHeader>
             <CardTitle className="text-2xl">Send Message</CardTitle>
             <CardDescription>
-              Fill out the form below and I'll get back to you as soon as
-              possible
+              Fill out the form below and I`&lsquo;`ll get back to you as soon
+              as possible
             </CardDescription>
           </CardHeader>
           <CardContent>
