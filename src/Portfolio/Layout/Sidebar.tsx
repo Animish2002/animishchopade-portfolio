@@ -1,10 +1,25 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import profile from "@/assets/profile.jpg";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Phone, Pin } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Pin,
+} from "lucide-react";
 
 const Sidebar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <>
       <div className="w-80 h-[80vh] bg-zinc-900 text-white p-6 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 md:block hidden">
@@ -28,10 +43,8 @@ const Sidebar = () => {
             </Badge>
           </div>
 
-          {/* Divider */}
           <div className="border-t border-zinc-600 w-full max-w-56 my-4"></div>
 
-          {/* Contact Information */}
           <div className="flex flex-col gap-4 w-full">
             <div className="flex items-center gap-3">
               <div className="flex-shrink-0">
@@ -102,7 +115,9 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-auto block md:hidden bg-zinc-900 text-white p-3 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700">
+
+      {/* Mobile View */}
+      <div className="w-full h-auto block md:hidden bg-zinc-900 text-white p-3 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
         <div>
           <div className="flex flex-row-1 items-center justify-start gap-6 h-full">
             <div className="">
@@ -120,6 +135,94 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
+
+        {/* Toggle Arrow */}
+        <div className="absolute top-[2.2px] right-[2.5px]">
+          <button
+            onClick={toggleDropdown}
+            className="text-yellow-500 w-9 h-9 p-2.5 shadow-sm shadow-zinc-300/50 rounded-tr-2xl rounded-bl-2xl hover:bg-zinc-800 transition-colors"
+          >
+            {isDropdownOpen ? (
+              <ArrowUp className="w-4 h-4" />
+            ) : (
+              <ArrowDown className="w-4 h-4" />
+            )}
+          </button>
+        </div>
+
+        {/* Dropdown Content */}
+        {isDropdownOpen && (
+          <div className="mt-4 pt-4 border-t border-zinc-600">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0">
+                  <Mail className="text-yellow-500 w-8 h-8 p-2 border border-zinc-600 rounded-lg" />
+                </div>
+                <a
+                  href="mailto:animishchopade123@gmail.com"
+                  className="text-sm text-zinc-300 hover:text-white break-all"
+                >
+                  animishchopade123@gmail.com
+                </a>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0">
+                  <Phone className="text-yellow-500 w-8 h-8 p-2 border border-zinc-600 rounded-lg" />
+                </div>
+                <span className="text-sm text-zinc-300">+91 9158067574</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0">
+                  <Pin className="text-yellow-500 w-8 h-8 p-2 border border-zinc-600 rounded-lg" />
+                </div>
+                <span className="text-sm text-zinc-300">
+                  Pune, Maharashtra, India
+                </span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-4 flex items-center justify-center gap-4">
+              <a
+                href="https://www.linkedin.com/in/animish-chopade"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 p-1.5 border border-zinc-600 rounded-lg hover:border-zinc-500 hover:bg-zinc-800 transition-colors flex items-center justify-center"
+                title="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+
+              <a
+                href="https://github.com/Animish2002"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 p-1.5 border border-zinc-600 rounded-lg hover:border-zinc-500 hover:bg-zinc-800 transition-colors flex items-center justify-center"
+                title="GitHub"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+
+              <a
+                href="https://x.com/animish06"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 p-1.5 border border-zinc-600 rounded-lg hover:border-zinc-500 hover:bg-zinc-800 transition-colors flex items-center justify-center"
+                title="Twitter/X"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="w-4 h-4 fill-current"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
