@@ -118,37 +118,39 @@ const Contact = () => {
   ];
 
   return (
-    <div className="text-start p-6">
-      <span className="text-3xl font-semibold aboutMe">Projects</span>
+    <div className="text-start lg:p-6 h-auto ">
+      <span className="text-3xl font-semibold aboutMe">Contact</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-zinc-900">
         {/* Contact Information */}
         <div className="space-y-6">
-          <Card>
+          <Card className="bg-zinc-900 border border-zinc-700">
             <CardHeader>
-              <CardTitle className="text-2xl">Get In Touch</CardTitle>
-              <CardDescription className="text-base">
-                I`&lsquo;`m always interested in new opportunities and
-                interesting projects. Whether you have a question or just want
-                to say hello, feel free to reach out!
+              <CardTitle className="text-2xl aboutMe text-zinc-50">
+                Get In Touch
+              </CardTitle>
+              <CardDescription className="text-base text-zinc-50">
+                I&lsquo;m always interested in new opportunities and interesting
+                projects. Whether you have a question or just want to say hello,
+                feel free to reach out!
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-4 p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                  className="flex items-center space-x-4 p-4 rounded-lg border hover:bg-accent/50 transition-colors border-zinc-700"
                 >
                   <div className="flex-shrink-0">
                     <info.icon className="w-5 h-5 text-yellow-500" />
                   </div>
                   <div className="flex-grow">
-                    <p className="font-medium text-foreground">{info.title}</p>
+                    <p className="font-medium text-zinc-50">{info.title}</p>
                     {info.action ? (
                       <a
                         href={info.action}
-                        className="text-muted-foreground hover:text-foreground transition-colors"
+                        className="text-muted-foreground hover:text-foreground transition-colors lg:text-[16px] text-sm"
                       >
                         {info.details}
                       </a>
@@ -161,22 +163,24 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-zinc-900 border border-zinc-700">
             <CardHeader>
-              <CardTitle>Follow Me</CardTitle>
-              <CardDescription>
+              <CardTitle className="aboutMe text-2xl text-zinc-50">
+                Follow Me
+              </CardTitle>
+              <CardDescription className="text-sm text-zinc-50">
                 Connect with me on social media and check out my work
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 ">
                 {socialLinks.map((social, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
                     asChild
-                    className="h-auto p-4 flex flex-col items-center space-y-2 hover:bg-accent/50 transition-all duration-300 hover:scale-105"
+                    className="h-auto p-4 flex flex-col items-center space-y-2 hover:bg-accent/50 transition-all duration-300 hover:scale-105 bg-zinc-900"
                   >
                     <a
                       href={social.href}
@@ -184,8 +188,11 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-5 h-5" />
-                      <Badge variant="secondary" className="text-xs">
+                      <social.icon className="w-5 h-5  text-yellow-500" />
+                      <Badge
+                        variant="secondary"
+                        className="text-xs border text-yellow-500 hover:shadow-lg shadow-yellow-500/50 bg-zinc-900"
+                      >
                         {social.badge}
                       </Badge>
                     </a>
@@ -197,12 +204,12 @@ const Contact = () => {
         </div>
 
         {/* Contact Form */}
-        <Card>
+        <Card className="bg-zinc-900 border border-zinc-700">
           <CardHeader>
-            <CardTitle className="text-2xl">Send Message</CardTitle>
-            <CardDescription>
-              Fill out the form below and I`&lsquo;`ll get back to you as soon
-              as possible
+            <CardTitle className="text-2xl aboutMe text-zinc-50">Send Message</CardTitle>
+            <CardDescription className="text-zinc-50">
+              Fill out the form below and I&lsquo;ll get back to you as soon as
+              possible
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -217,7 +224,7 @@ const Contact = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label className="text-zinc-50" htmlFor="name">Full Name</Label>
                   <Input
                     id="name"
                     name="name"
@@ -228,7 +235,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label className="text-zinc-50" htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     name="email"
@@ -242,7 +249,7 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
+                <Label className="text-zinc-50" htmlFor="subject">Subject</Label>
                 <Input
                   id="subject"
                   name="subject"
@@ -254,7 +261,7 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
+                <Label className="text-zinc-50" htmlFor="message">Message</Label>
                 <Textarea
                   id="message"
                   name="message"

@@ -5,36 +5,48 @@ import Resume from "@/Portfolio/Resume";
 import Projects from "@/Portfolio/Projects";
 import Contact from "@/Portfolio/Contact";
 
-const Dashoard = () => {
+const Dashboard = () => {
   return (
-    <div className="w-[75rem] h-auto  bg-zinc-900  text-white p-4 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
+    <div className="lg:w-[75rem] w-auto h-auto bg-zinc-900 text-white p-4 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
       <Tabs defaultValue="about" className="w-full h-full">
-        <div className="top-0 right-0 absolute w-[28rem] h-12 ">
-          <TabsList className="w-full h-full bg-zinc-800 rounded-t-3xl ">
-            <TabsTrigger value="about" className="w-1/3 h-full text-yellow-500">
+        {/* Desktop tabs - top/right positioned */}
+        <div className="hidden lg:block lg:absolute lg:top-0 lg:right-0 lg:w-[28rem] h-12 z-50">
+          <TabsList className="w-full h-full bg-zinc-800 rounded-t-3xl">
+            <TabsTrigger value="about" className="w-1/4 h-full text-yellow-500">
               About Me
             </TabsTrigger>
-            <TabsTrigger
-              value="resume"
-              className="w-1/3 h-full text-yellow-500"
-            >
+            <TabsTrigger value="resume" className="w-1/4 h-full text-yellow-500">
               Resume
             </TabsTrigger>
-            <TabsTrigger
-              value="projects"
-              className="w-1/3 h-full text-yellow-500"
-            >
+            <TabsTrigger value="projects" className="w-1/4 h-full text-yellow-500">
               Projects
             </TabsTrigger>
-            <TabsTrigger
-              value="contact"
-              className="w-1/3 h-full text-yellow-500"
-            >
+            <TabsTrigger value="contact" className="w-1/4 h-full text-yellow-500">
               Contact
             </TabsTrigger>
           </TabsList>
         </div>
-        <div>
+
+        {/* Mobile tabs - bottom positioned, full width */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 h-16 z-50 ">
+          <TabsList className="w-full h-full bg-zinc-800 rounded-none border-t border-zinc-700 rounded-t-4xl px-14">
+            <TabsTrigger value="about" className="flex-1 h-full text-yellow-500 rounded-lg py-4">
+              About Me
+            </TabsTrigger>
+            <TabsTrigger value="resume" className="flex-1 h-full text-yellow-500 rounded-lg py-4">
+              Resume
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="flex-1 h-full text-yellow-500 rounded-lg py-4">
+              Projects
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="flex-1 h-full text-yellow-500 rounded-lg py-4">
+              Contact
+            </TabsTrigger>
+          </TabsList>
+        </div>
+
+        {/* Content area with bottom padding on mobile to account for fixed tabs */}
+        <div className="pb-16 lg:pb-0">
           <TabsContent value="about" className="w-full h-full">
             <AboutMe />
           </TabsContent>
@@ -53,4 +65,4 @@ const Dashoard = () => {
   );
 };
 
-export default Dashoard;
+export default Dashboard;

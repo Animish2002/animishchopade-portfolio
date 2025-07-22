@@ -12,7 +12,7 @@ const Resume = () => {
   };
 
   return (
-    <div className="text-start p-6">
+    <div className="text-start lg:p-6 h-auto">
       <span className="text-3xl font-semibold aboutMe">Resume</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <div className="flex flex-col gap-4 mb-6">
@@ -44,7 +44,7 @@ const Resume = () => {
           <span className="text-yellow-500 block">
             February 2024 - August 2024
           </span>
-          <p className="text-zinc-300 mt-2 w-[40rem]">
+          <p className="text-zinc-300 mt-2 lg:w-[40rem]">
             Freelance Full Stack Developer at The Fortune Club, building SaaS
             products and marketing websites using React, Node.js, Supabase, and
             more. Previously worked at Sciqus Infotech as a Frontend Intern,

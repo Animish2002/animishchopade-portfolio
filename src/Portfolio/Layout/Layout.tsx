@@ -4,7 +4,7 @@ import React from "react";
 
 const Layout = () => {
   return (
-    <div className="py-20 px-24 flex flex-row gap-4 justify-center items-start">
+    <div className="md:py-20 md:px-24 p-2 py-5 flex lg:flex-row flex-col lg:gap-4 gap-2 justify-center items-start bg-zinc-800 min-h-screen">
       <Sidebar />
       <Dashoard />
     </div>
