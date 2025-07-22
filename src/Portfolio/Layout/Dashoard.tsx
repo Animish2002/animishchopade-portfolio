@@ -28,8 +28,8 @@ const Dashboard = () => {
         </div>
 
         {/* Mobile tabs - bottom positioned, full width */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 h-16 z-50 ">
-          <TabsList className="w-full h-full bg-zinc-800 rounded-none border-t border-zinc-700 rounded-t-4xl px-14">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 h-12 z-50 ">
+          <TabsList className="w-full h-full bg-zinc-800 rounded-none border-t border-zinc-700 rounded-t-[25px] border-t-zinc-700 px-14 opacity-90 py-3">
             <TabsTrigger value="about" className="flex-1 h-full text-yellow-500 rounded-lg py-4">
               About Me
             </TabsTrigger>
