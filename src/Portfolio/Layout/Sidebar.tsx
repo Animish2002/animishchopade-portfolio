@@ -184,7 +184,7 @@ const Sidebar = () => {
             </div>
 
             {/* Social Links */}
-            <div className="mt-4 flex items-center justify-center gap-4">
+            <div className="mt-4 flex items-center justify-center gap-4 border-t border-zinc-600 pt-4">
               <a
                 href="https://www.linkedin.com/in/animish-chopade"
                 target="_blank"
