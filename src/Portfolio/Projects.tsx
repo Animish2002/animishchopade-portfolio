@@ -4,6 +4,7 @@ import { quality } from "@cloudinary/url-gen/actions/delivery";
 import { format } from "@cloudinary/url-gen/actions/delivery";
 import { autoBest } from "@cloudinary/url-gen/qualifiers/quality";
 import { HoverEffect } from "@/components/card-hover-effect";
+import { title } from "process";
 
 const Projects = () => {
   const cld = new Cloudinary({ cloud: { cloudName: "dkv3bx51z" } });
@@ -49,6 +50,15 @@ const Projects = () => {
       description:
         "A CRM built for a Property Advocate to track and manage his cases and daily logs efficiently.",
       category: "Business",
+    },
+    {
+      title: "Portfolio Website - 2024",
+      image:
+        "https://res.cloudinary.com/dkv3bx51z/image/upload/v1753266222/2024_yz9tcu.png",
+      link: "https://2024.animishchopade.in/",
+      description:
+        "A Responsive Portfolio Website to showcase my skills and projects.",
+      category: "Frontend",
     },
     {
       title: "Anuj Bagade",
@@ -104,7 +114,9 @@ const Projects = () => {
 
   return (
     <div className="text-start md:p-6">
-      <span className="lg:text-3xl text-xl font-semibold aboutMe">Projects</span>
+      <span className="lg:text-3xl text-xl font-semibold aboutMe">
+        Projects
+      </span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <div className="text-center text-sm">Click to view more</div>
       <div>
