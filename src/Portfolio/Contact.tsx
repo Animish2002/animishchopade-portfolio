@@ -34,8 +34,10 @@ const Contact = () => {
     message: "",
   });
 
+  const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
+  const [submitError, setSubmitError] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,16 +52,40 @@ const Contact = () => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage("");
+    setSubmitError("");
 
-    // Simulate form submission
-    setTimeout(() => {
-      setSubmitMessage("Thank you! Your message has been sent successfully.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+    try {
+      const response = await fetch(`${formspreeEndpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitMessage("Thank you! Your message has been sent successfully.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitMessage(""), 5000);
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      setSubmitError(
+        "Sorry, there was an error sending your message. Please try again."
+      );
+      setTimeout(() => setSubmitError(""), 5000);
+    } finally {
       setIsSubmitting(false);
-
-      // Clear success message after 5 seconds
-      setTimeout(() => setSubmitMessage(""), 5000);
-    }, 1000);
+    }
   };
 
   const socialLinks = [
@@ -119,7 +145,7 @@ const Contact = () => {
 
   return (
     <div className="text-start lg:p-6 h-auto ">
-      <span className="text-3xl font-semibold aboutMe">Contact</span>
+      <span className="lg:text-3xl text-xl font-semibold aboutMe">Contact</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-zinc-900">
@@ -127,10 +153,10 @@ const Contact = () => {
         <div className="space-y-6">
           <Card className="bg-zinc-900 border border-zinc-700">
             <CardHeader>
-              <CardTitle className="text-2xl aboutMe text-zinc-50">
+              <CardTitle className="text-xl aboutMe text-zinc-50">
                 Get In Touch
               </CardTitle>
-              <CardDescription className="text-base text-zinc-50">
+              <CardDescription className="text-sm text-zinc-50">
                 I&lsquo;m always interested in new opportunities and interesting
                 projects. Whether you have a question or just want to say hello,
                 feel free to reach out!
@@ -165,7 +191,7 @@ const Contact = () => {
 
           <Card className="bg-zinc-900 border border-zinc-700">
             <CardHeader>
-              <CardTitle className="aboutMe text-2xl text-zinc-50">
+              <CardTitle className="aboutMe text-xl text-zinc-50">
                 Follow Me
               </CardTitle>
               <CardDescription className="text-sm text-zinc-50">
@@ -206,7 +232,9 @@ const Contact = () => {
         {/* Contact Form */}
         <Card className="bg-zinc-900 border border-zinc-700">
           <CardHeader>
-            <CardTitle className="text-2xl aboutMe text-zinc-50">Send Message</CardTitle>
+            <CardTitle className="text-xl aboutMe text-zinc-50">
+              Send Message
+            </CardTitle>
             <CardDescription className="text-zinc-50">
               Fill out the form below and I&lsquo;ll get back to you as soon as
               possible
@@ -214,17 +242,23 @@ const Contact = () => {
           </CardHeader>
           <CardContent>
             {submitMessage && (
-              <Alert className="mb-6 border-green-500/50 bg-green-500/10">
-                <AlertDescription className="text-green-600 dark:text-green-400">
-                  {submitMessage}
-                </AlertDescription>
-              </Alert>
+              <div className="mb-6 p-4 border border-green-500/50 bg-green-500/10 rounded-lg">
+                <p className="text-green-400">{submitMessage}</p>
+              </div>
+            )}
+
+            {submitError && (
+              <div className="mb-6 p-4 border border-red-500/50 bg-red-500/10 rounded-lg">
+                <p className="text-red-400">{submitError}</p>
+              </div>
             )}
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-zinc-50" htmlFor="name">Full Name</Label>
+                  <Label className="text-zinc-50" htmlFor="name">
+                    Full Name
+                  </Label>
                   <Input
                     id="name"
                     name="name"
@@ -235,7 +269,9 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-zinc-50" htmlFor="email">Email Address</Label>
+                  <Label className="text-zinc-50" htmlFor="email">
+                    Email Address
+                  </Label>
                   <Input
                     id="email"
                     name="email"
@@ -249,7 +285,9 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-zinc-50" htmlFor="subject">Subject</Label>
+                <Label className="text-zinc-50" htmlFor="subject">
+                  Subject
+                </Label>
                 <Input
                   id="subject"
                   name="subject"
@@ -261,7 +299,9 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-zinc-50" htmlFor="message">Message</Label>
+                <Label className="text-zinc-50" htmlFor="message">
+                  Message
+                </Label>
                 <Textarea
                   id="message"
                   name="message"

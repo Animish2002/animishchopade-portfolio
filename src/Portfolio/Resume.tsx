@@ -13,7 +13,7 @@ const Resume = () => {
 
   return (
     <div className="text-start lg:p-6 h-auto">
-      <span className="text-3xl font-semibold aboutMe">Resume</span>
+      <span className="lg:text-3xl text-xl font-semibold aboutMe">Resume</span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <div className="flex flex-col gap-4 mb-6">
         <div className="aboutMe text-xl">
@@ -21,7 +21,7 @@ const Resume = () => {
           Education
         </div>
         <div className="text-gray-500 text-sm ml-14 flex flex-col gap-1">
-          <span className="text-zinc-100 block aboutMe">
+          <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
             Vishwakarma Institute Of Information Technology - Pune
           </span>
           <span className="text-yellow-500 block">2020 - 2024</span>
@@ -32,19 +32,19 @@ const Resume = () => {
           Experience
         </div>
         <div className="text-gray-500 text-sm ml-14 flex flex-col gap-1">
-          <span className="text-zinc-100 block aboutMe">
+          <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
             FullStack Developer Freelance
           </span>
           <span className="text-yellow-500 block">
             September 2024 - Present 2025
           </span>
-          <span className="text-zinc-100 block aboutMe">
+          <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
             Frontend Developer Intern - Sciqus
           </span>
           <span className="text-yellow-500 block">
             February 2024 - August 2024
           </span>
-          <p className="text-zinc-300 mt-2 lg:w-[40rem]">
+          <p className="text-zinc-300 mt-2 lg:w-[40rem] md:text-[16px] text-sm">
             Freelance Full Stack Developer at The Fortune Club, building SaaS
             products and marketing websites using React, Node.js, Supabase, and
             more. Previously worked at Sciqus Infotech as a Frontend Intern,

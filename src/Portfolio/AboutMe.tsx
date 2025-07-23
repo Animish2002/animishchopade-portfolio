@@ -66,15 +66,15 @@ const AboutMe = () => {
                 alt="Frontend Development Icon"
                 className="mr-4"
               />
-              <h2 className="text-2xl font-semibold text-zinc-50">{cardData[0].title}</h2>
+              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">{cardData[0].title}</h2>
             </div>
-            <p className="text-zinc-50 mb-2 text-[16px]">
+            <p className="text-zinc-50 mb-2  md:text-[16px] text-sm">
               {cardData[0].description}
             </p>
             <ul className=" text-zinc-50 inline-flex flex-wrap gap-2">
               {cardData[0].technologies.map((tech, index) => (
                 <li key={index}>
-                  <Badge>{tech}</Badge>
+                  <Badge className="bg-zinc-50 text-zinc-900">{tech}</Badge>
                 </li>
               ))}
             </ul>
@@ -86,15 +86,15 @@ const AboutMe = () => {
                 alt="Frontend Development Icon"
                 className="mr-4"
               />
-              <h2 className="text-2xl font-semibold text-zinc-50">{cardData[1].title}</h2>
+              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">{cardData[1].title}</h2>
             </div>
-            <p className="text-zinc-50 mb-4 text-[16px]">
+            <p className="text-zinc-50 mb-4 md:text-[16px] text-sm">
               {cardData[1].description}
             </p>
             <ul className="text-zinc-50 inline-flex flex-wrap gap-2">
               {cardData[1].technologies.map((tech, index) => (
                 <li key={index}>
-                  <Badge>{tech}</Badge>
+                  <Badge className="bg-zinc-50 text-zinc-900">{tech}</Badge>
                 </li>
               ))}
             </ul>
