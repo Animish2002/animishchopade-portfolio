@@ -48,7 +48,7 @@ const Projects = () => {
       title: "FitFocus (in-Progress)",
       image:
         "https://res.cloudinary.com/dkv3bx51z/image/upload/v1753353285/fitfocus_2_qnbu8t.png",
-      link: "https://www.fitfocus.in/",
+      link: "https://fitfocus.animishchopade.in/",
       description: "Fitness and Nutrition App",
       category: "Fullstack",
     },
