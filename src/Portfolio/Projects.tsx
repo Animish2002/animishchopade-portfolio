@@ -34,6 +34,8 @@ const Projects = () => {
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1745862541/c2e6db63-b364-4306-af5d-75c89fc6ae92.png";
   const anujBagade =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1752318121/anuj_work_mvr6zt.png";
+  const aadarshInstitute =
+    "https://res.cloudinary.com/dkv3bx51z/image/upload/v1756969059/68347166-b87a-4ac7-b5ce-4db19376d562.png";
 
   const projects = [
     {
@@ -75,6 +77,14 @@ const Projects = () => {
       link: "https://www.anujbagade.com/",
       description:
         "Developed a responsive landing page for a Content Creator, helped him start his Ed-Tech platform by integrating a LMS Platform.",
+      category: "Business",
+    },
+    {
+      title: "Aadarsh Institute",
+      image: aadarshInstitute,
+      link: "https://aadarshinstitute.in/",
+      description:
+        "A freelance project for an educational institute, designed and developed to showcase courses, improve online presence, and included a student testimonial section.",
       category: "Business",
     },
     {
