@@ -1,6 +1,7 @@
 import { BookOpen, SquareCode } from "lucide-react";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
+import { FlipText } from "@/components/ui/flip-text";
 
 const Resume = () => {
   const techStacks = {
@@ -13,7 +14,10 @@ const Resume = () => {
 
   return (
     <div className="text-start lg:p-6 h-auto">
-      <span className="lg:text-3xl text-xl font-semibold aboutMe">Resume</span>
+      <span className="lg:text-3xl text-xl font-semibold aboutMe">
+        {" "}
+        <FlipText className="aboutMe -tracking-widest ">My Resume</FlipText>
+      </span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <div className="flex flex-col gap-4 mb-6">
         <div className="aboutMe text-xl">

@@ -4,6 +4,7 @@ import React from "react";
 import icon from "@/assets/icon-dev.svg";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { FlipText } from "@/components/ui/flip-text";
 
 const AboutMe = () => {
   // Card data for Frontend and Backend
@@ -39,7 +40,9 @@ const AboutMe = () => {
   return (
     <div className="text-start lg:p-6 h-auto ">
       <span className="lg:text-3xl text-xl font-semibold aboutMe">
-        About Me
+        <FlipText className="aboutMe -tracking-widest ">
+          About Me
+        </FlipText>
       </span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <span>
@@ -66,7 +69,9 @@ const AboutMe = () => {
                 alt="Frontend Development Icon"
                 className="mr-4"
               />
-              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">{cardData[0].title}</h2>
+              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">
+                {cardData[0].title}
+              </h2>
             </div>
             <p className="text-zinc-50 mb-2  md:text-[16px] text-sm">
               {cardData[0].description}
@@ -86,7 +91,9 @@ const AboutMe = () => {
                 alt="Frontend Development Icon"
                 className="mr-4"
               />
-              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">{cardData[1].title}</h2>
+              <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">
+                {cardData[1].title}
+              </h2>
             </div>
             <p className="text-zinc-50 mb-4 md:text-[16px] text-sm">
               {cardData[1].description}

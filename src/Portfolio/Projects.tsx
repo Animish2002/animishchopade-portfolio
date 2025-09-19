@@ -4,8 +4,7 @@ import { quality } from "@cloudinary/url-gen/actions/delivery";
 import { format } from "@cloudinary/url-gen/actions/delivery";
 import { autoBest } from "@cloudinary/url-gen/qualifiers/quality";
 import { HoverEffect } from "@/components/card-hover-effect";
-import { title } from "process";
-import { image } from "@cloudinary/url-gen/qualifiers/source";
+import { FlipText } from "@/components/ui/flip-text";
 
 const Projects = () => {
   const cld = new Cloudinary({ cloud: { cloudName: "dkv3bx51z" } });
@@ -134,7 +133,7 @@ const Projects = () => {
   return (
     <div className="text-start md:p-6">
       <span className="lg:text-3xl text-xl font-semibold aboutMe">
-        Projects
+        <FlipText className="aboutMe -tracking-widest ">Projects</FlipText>
       </span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
       <div className="text-center text-sm">Click to view more</div>

@@ -23,8 +23,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { FlipText } from "@/components/ui/flip-text";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -145,7 +145,10 @@ const Contact = () => {
 
   return (
     <div className="text-start lg:p-6 h-auto ">
-      <span className="lg:text-3xl text-xl font-semibold aboutMe">Contact</span>
+      <span className="lg:text-3xl text-xl font-semibold aboutMe">
+      
+        <FlipText className="aboutMe -tracking-widest ">Contact</FlipText>
+      </span>
       <div className="border-t border-4 border-yellow-600 w-full max-w-14 my-4 rounded-xl"></div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-zinc-900">
