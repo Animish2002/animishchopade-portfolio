@@ -20,7 +20,7 @@ const Layout = () => {
           <Sidebar />
           <Dashoard />
         </div>
-        <div className="right-24 bottom-20 fixed">
+        <div className="right-20 bottom-20 fixed">
           <SpinningText className="text-zinc-300 text-lg hidden md:block" radius={4} >learn more • grow more •</SpinningText>
         </div>
       </div>
