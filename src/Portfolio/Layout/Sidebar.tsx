@@ -12,6 +12,7 @@ import {
   Phone,
   Pin,
 } from "lucide-react";
+import { ShineBorder } from "@/components/ui/shine-border";
 
 const Sidebar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,10 +23,14 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="w-80 h-auto bg-zinc-900 text-white p-6 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 md:block hidden">
+      <div className="w-80 h-auto bg-zinc-900 text-white p-4 rounded-3xl border border-zinc-700 hover:shadow-zinc-700 relative md:block hidden">
         <div className="flex flex-col items-center justify-start gap-4 h-full">
           {/* Profile Section */}
-          <div className="mt-6 mb-2">
+          <div className="mt-6 relative mb-2">
+            <ShineBorder
+              shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+              className="rounded-3xl"
+            />
             <Image
               src={profile}
               alt="profile"
@@ -119,8 +124,12 @@ const Sidebar = () => {
       {/* Mobile View */}
       <div className="w-full h-auto block md:hidden bg-zinc-900 text-white p-3 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
         <div>
-          <div className="flex flex-row-1 items-center justify-start gap-6 h-full">
-            <div className="">
+          <div className="flex  flex-row-1 items-center justify-start gap-6 h-full">
+            <div className="relative">
+              <ShineBorder
+                shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                className="rounded-3xl"
+              />
               <Image
                 src={profile}
                 alt="profile"

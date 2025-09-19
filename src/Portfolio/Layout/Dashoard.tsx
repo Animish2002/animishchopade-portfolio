@@ -7,7 +7,7 @@ import Contact from "@/Portfolio/Contact";
 
 const Dashboard = () => {
   return (
-    <div className="lg:w-[75rem] w-auto h-auto bg-zinc-900 text-white p-4 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 relative">
+    <div className="lg:w-[75rem] w-auto h-auto bg-zinc-900 text-white p-4 rounded-3xl border border-zinc-700 hover:shadow-zinc-700 relative">
       <Tabs defaultValue="about" className="w-full h-full">
         {/* Desktop tabs - top/right positioned */}
         <div className="hidden lg:block lg:absolute lg:top-0 lg:right-0 lg:w-[28rem] h-12 z-50">
