@@ -22,7 +22,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="w-80 h-[80vh] bg-zinc-900 text-white p-6 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 md:block hidden">
+      <div className="w-80 h-auto bg-zinc-900 text-white p-6 rounded-3xl border border-zinc-700 md:shadow-lg hover:shadow-zinc-700 md:block hidden">
         <div className="flex flex-col items-center justify-start gap-4 h-full">
           {/* Profile Section */}
           <div className="mt-6 mb-2">
