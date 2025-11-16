@@ -35,6 +35,8 @@ const Projects = () => {
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1752318121/anuj_work_mvr6zt.png";
   const aadarshInstitute =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1756969059/68347166-b87a-4ac7-b5ce-4db19376d562.png";
+  const lifefirst =
+    "https://res.cloudinary.com/dkv3bx51z/image/upload/v1763306914/772c1926-4a83-4a3c-9724-6ca1ee472c3f.png";
 
   const projects = [
     {
@@ -46,11 +48,21 @@ const Projects = () => {
       category: "Web App",
     },
     {
-      title: "FitFocus (in-Progress)",
+      title: "FitFocus(AI Powered Fitness and Nutrition App)",
       image:
         "https://res.cloudinary.com/dkv3bx51z/image/upload/v1753353285/fitfocus_2_qnbu8t.png",
       link: "https://fitfocus.animishchopade.in/",
-      description: "Fitness and Nutrition App",
+      description:
+        "AI Powered Fitness and Nutrition App that helps in achieving a healthy lifestyle with customized plans.",
+      category: "Fullstack",
+    },
+    {
+      title: "LifeFirst Concepts & Technologies Pvt.Ltd.",
+      image:
+        "https://res.cloudinary.com/dkv3bx51z/image/upload/v1763306914/772c1926-4a83-4a3c-9724-6ca1ee472c3f.png",
+      link: "https://www.life-first.in/",
+      description:
+        "Designed and developed a high-impact landing page for LifeFirst Concepts & Technologies Pvt. Ltd., built to showcase their products and services and strengthen customer acquisition.",
       category: "Fullstack",
     },
     {
