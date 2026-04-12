@@ -88,7 +88,7 @@ const AboutMe = () => {
             <div className="flex items-center mb-2">
               <Image
                 src={cardData[1].icon}
-                alt="Frontend Development Icon"
+                alt="Backend Development Icon"
                 className="mr-4"
               />
               <h2 className="md:text-2xl text-lg font-semibold text-zinc-50">

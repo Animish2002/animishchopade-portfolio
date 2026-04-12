@@ -35,26 +35,53 @@ const Resume = () => {
           <SquareCode className="inline-block mr-2 text-yellow-500 w-12 h-12 p-3 border-1 rounded-xl" />
           Experience
         </div>
-        <div className="text-gray-500 text-sm ml-14 flex flex-col gap-1">
-          <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
-            FullStack Developer Freelance
-          </span>
-          <span className="text-yellow-500 block">
-            September 2024 - Present 2025
-          </span>
-          <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
-            Frontend Developer Intern - Sciqus
-          </span>
-          <span className="text-yellow-500 block">
-            February 2024 - August 2024
-          </span>
-          <p className="text-zinc-300 mt-2 lg:w-[40rem] md:text-[16px] text-sm">
-            Freelance Full Stack Developer at The Fortune Club, building SaaS
-            products and marketing websites using React, Node.js, Supabase, and
-            more. Previously worked at Sciqus Infotech as a Frontend Intern,
-            delivering responsive UIs and optimizing performance with lazy
-            loading and API integrations.
-          </p>
+        <div className="text-gray-500 text-sm ml-14 flex flex-col gap-6">
+          {/* Qnopy India */}
+          <div className="flex flex-col gap-1">
+            <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
+              Software Developer — Qnopy India
+            </span>
+            <span className="text-yellow-500 block">
+              October 2025 – Present
+            </span>
+            <p className="text-zinc-300 mt-1 lg:w-[40rem] md:text-[16px] text-sm">
+              Working as a Software Developer at Qnopy India, contributing to
+              the design and development of scalable web applications. Involved
+              in building features end-to-end, collaborating with cross-functional
+              teams, and delivering production-quality code using modern
+              full-stack technologies.
+            </p>
+          </div>
+
+          {/* Freelance */}
+          <div className="flex flex-col gap-1">
+            <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
+              Full Stack Developer — Freelance
+            </span>
+            <span className="text-yellow-500 block">
+              September 2024 – October 2025
+            </span>
+            <p className="text-zinc-300 mt-1 lg:w-[40rem] md:text-[16px] text-sm">
+              Built SaaS products and marketing websites for clients at The
+              Fortune Club using React, Next.js, Node.js, and Supabase. Delivered
+              full-stack solutions including CRMs, landing pages, and LMS
+              integrations across multiple live domains.
+            </p>
+          </div>
+
+          {/* Sciqus */}
+          <div className="flex flex-col gap-1">
+            <span className="text-zinc-100 block aboutMe md:text-[16px] text-sm">
+              Frontend Developer Intern — Sciqus Infotech
+            </span>
+            <span className="text-yellow-500 block">
+              February 2024 – August 2024
+            </span>
+            <p className="text-zinc-300 mt-1 lg:w-[40rem] md:text-[16px] text-sm">
+              Delivered responsive UIs and improved application performance
+              through lazy loading, code splitting, and REST API integrations.
+            </p>
+          </div>
         </div>
       </div>
       <span className="text-2xl aboutMe">My Skills</span>

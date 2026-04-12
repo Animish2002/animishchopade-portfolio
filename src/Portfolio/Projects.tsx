@@ -37,6 +37,11 @@ const Projects = () => {
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1756969059/68347166-b87a-4ac7-b5ce-4db19376d562.png";
   const lifefirst =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1763306914/772c1926-4a83-4a3c-9724-6ca1ee472c3f.png";
+  const kcal = cld
+    .image("kcal_screenshot")
+    .delivery(quality(autoBest()))
+    .delivery(format("auto"))
+    .toURL();
 
   const projects = [
     {
@@ -55,6 +60,14 @@ const Projects = () => {
       description:
         "AI Powered Fitness and Nutrition App that helps in achieving a healthy lifestyle with customized plans.",
       category: "Fullstack",
+    },
+    {
+      title: "KCAL - Calorie Tracker",
+      image: kcal,
+      link: "https://kcal-app.animishchopade.in/",
+      description:
+        "A calorie and nutrition tracking app to help users monitor their daily intake, set health goals, and maintain a balanced lifestyle.",
+      category: "Web App",
     },
     {
       title: "LifeFirst Concepts & Technologies Pvt.Ltd.",
