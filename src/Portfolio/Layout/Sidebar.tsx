@@ -132,9 +132,12 @@ const Sidebar = () => {
                 className="rounded-3xl"
               />
               <Image
-                src={profile}
+                src="https://res.cloudinary.com/dkv3bx51z/image/upload/f_auto,q_auto/v1776012662/IMG-20250503-WA0076.jpg_rzx0tr.jpg"
                 alt="profile"
                 className="w-28 h-28 rounded-3xl object-cover"
+                width={112}
+                height={112}
+                priority
               />
             </div>
             <div className="flex flex-col items-start text-left">
