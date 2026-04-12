@@ -37,11 +37,8 @@ const Projects = () => {
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1756969059/68347166-b87a-4ac7-b5ce-4db19376d562.png";
   const lifefirst =
     "https://res.cloudinary.com/dkv3bx51z/image/upload/v1763306914/772c1926-4a83-4a3c-9724-6ca1ee472c3f.png";
-  const kcal = cld
-    .image("kcal_screenshot")
-    .delivery(quality(autoBest()))
-    .delivery(format("auto"))
-    .toURL();
+  const kcal =
+    "https://res.cloudinary.com/dkv3bx51z/image/upload/v1776014244/edfd913b-9ac0-4613-b1a3-a4a90f7b6ccd.png";
 
   const projects = [
     {
