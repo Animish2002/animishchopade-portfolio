@@ -59,7 +59,9 @@ export const HoverEffect = ({
                 src={item?.image}
                 alt={item?.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"
+                priority={idx < 3}
               />
             </div>
 
@@ -87,7 +89,7 @@ export const Card = ({
       )}
     >
       <div className="relative z-50">
-        <div className="p-2">{children}</div>
+        <div className="p-0">{children}</div>
       </div>
     </div>
   );

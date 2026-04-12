@@ -1,37 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Animish Chopade - Developer, Designer",
+  title: "Animish Chopade - Full Stack Developer",
   description:
-    "Fullstack Developer and Designer from Pune. You build, then you ship. Specialized in modern web apps using React, Node.js, and Supabase.",
+    "Full Stack Developer from Pune specializing in React, Next.js, Node.js, and modern web applications. Open to full-time roles and freelance projects.",
   icons: {
     icon: "/favicon.png",
   },
+  alternates: {
+    canonical: "https://animishchopade.in",
+  },
   openGraph: {
-    title: "Animish Chopade - Developer, Designer",
+    title: "Animish Chopade - Full Stack Developer",
     description:
-      "You build, then you ship. Fullstack Developer from Pune crafting clean, scalable web experiences.",
-    url: "https://animishchopade.com",
+      "Full Stack Developer from Pune building clean, scalable web products. React · Next.js · Node.js · TypeScript.",
+    url: "https://animishchopade.in",
     siteName: "Animish Chopade",
     images: [
       {
-        url: "https://x.com/animish06/photo",
+        url: "https://res.cloudinary.com/dkv3bx51z/image/upload/f_auto,q_auto/v1776012662/IMG-20250503-WA0076.jpg_rzx0tr.jpg",
         width: 1200,
         height: 630,
-        alt: "Animish Chopade - Fullstack Developer and Designer",
+        alt: "Animish Chopade - Full Stack Developer",
       },
     ],
     locale: "en_US",
@@ -39,10 +31,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Animish Chopade - Developer, Designer",
+    title: "Animish Chopade - Full Stack Developer",
     description:
-      "You build, then you ship. Fullstack Developer from Pune building modern web products.",
-    images: ["https://x.com/animish06/photo"],
+      "Full Stack Developer from Pune building modern web products with React, Next.js, and Node.js.",
+    images: [
+      "https://res.cloudinary.com/dkv3bx51z/image/upload/f_auto,q_auto/v1776012662/IMG-20250503-WA0076.jpg_rzx0tr.jpg",
+    ],
     creator: "@animish06",
   },
   robots: {
@@ -56,6 +50,17 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  keywords: [
+    "Animish Chopade",
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Node.js Developer",
+    "Pune Developer",
+    "Frontend Developer",
+    "TypeScript",
+    "Web Developer India",
+  ],
 };
 
 export default function RootLayout({
@@ -65,9 +70,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

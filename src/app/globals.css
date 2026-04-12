@@ -135,27 +135,46 @@
 
 @font-face {
   font-family: "Gilroy";
-  src: url("../fonts/Gilroy-Medium.ttf");
+  src: url("../fonts/Gilroy-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
-  font-family: "Gilroy";
-  font-weight: 400;
+  font-family: "Gilroy", sans-serif;
 }
 
 .name {
-  font-family: "Gilroy" sans-serif;
   letter-spacing: 1px;
   font-weight: 700;
 }
 
-@font-face {
-  font-family: "Gilroy2";
-  src: url("../fonts/Gilroy-HeavyItalic.ttf");
-}
-
 .aboutMe {
-  font-family: "Gilroy" sans-serif;
   letter-spacing: 1px;
   font-weight: 700;
 }

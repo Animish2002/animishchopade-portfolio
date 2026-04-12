@@ -17,9 +17,11 @@ const AboutMe = () => {
       technologies: [
         "React",
         "Next.js",
+        "Angular",
         "TypeScript",
         "Tailwind CSS",
         "JavaScript",
+        "RxJS",
       ],
     },
     {
@@ -30,6 +32,10 @@ const AboutMe = () => {
       technologies: [
         "Node.js",
         "Express",
+        "Java",
+        "Spring Boot",
+        "Hono",
+        "Drizzle ORM",
         "MongoDB",
         "PostgreSQL",
         "REST APIs",
@@ -61,7 +67,7 @@ const AboutMe = () => {
       </span>
       <div className="mt-8">
         <span className="text-xl aboutMe">What I do:</span>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:mt-14 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
           <Card className="bg-zinc-900 p-8 hover:shadow-xl transition-shadow duration-300 shadow-[inset_-16px_12px_48px_#46464625]">
             <div className="flex items-center mb-4">
               <Image

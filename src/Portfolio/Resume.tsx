@@ -6,8 +6,8 @@ import { FlipText } from "@/components/ui/flip-text";
 const Resume = () => {
   const techStacks = {
     languages: ["JavaScript", "TypeScript", "Java"],
-    frontend: ["React", "Next.js", "Tailwind CSS", "HTML/CSS"],
-    backend: ["Node.js", "Express.js", "Next.js API", "Prisma"],
+    frontend: ["React", "Next.js", "Angular", "RxJS", "Tailwind CSS", "HTML/CSS"],
+    backend: ["Node.js", "Express.js", "Java", "Spring Boot", "Hono", "Drizzle ORM", "Next.js API", "Prisma"],
     database: ["MongoDB", "PostgreSQL", "MySQL"],
     tools: ["Git", "AWS", "Vercel", "VS Code", "Postman", "NginX"],
   };

@@ -32,11 +32,12 @@ const Sidebar = () => {
               className="rounded-3xl"
             />
             <Image
-              src="https://res.cloudinary.com/dkv3bx51z/image/upload/v1776012662/IMG-20250503-WA0076.jpg_rzx0tr.jpg"
-              alt="profile"
-              className="w-44 h-44 rounded-3xl object-cover "
+              src="https://res.cloudinary.com/dkv3bx51z/image/upload/f_auto,q_auto/v1776012662/IMG-20250503-WA0076.jpg_rzx0tr.jpg"
+              alt="Animish Chopade - Full Stack Developer"
+              className="w-44 h-44 rounded-3xl object-cover"
               width={176}
               height={176}
+              priority
             />
           </div>
 
@@ -57,7 +58,7 @@ const Sidebar = () => {
               </div>
               <a
                 href="mailto:animishchopade123@gmail.com"
-                className="text-[16px] text-zinc-300 hover:text-white break-all"
+                className="text-sm text-zinc-300 hover:text-white whitespace-nowrap"
               >
                 animishchopade123@gmail.com
               </a>
