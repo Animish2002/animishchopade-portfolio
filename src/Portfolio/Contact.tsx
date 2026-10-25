@@ -129,8 +129,11 @@ export default function Contact() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.15} className="lg:col-span-6 lg:col-start-7">
-          <form onSubmit={submit} className="space-y-8">
+        <Reveal delay={0.15} className="relative lg:col-span-6 lg:col-start-7">
+          {/* soft colour behind the frosted form so the glass has something to blur */}
+          <div aria-hidden className="pointer-events-none absolute -left-10 top-6 size-56 rounded-full bg-leaf opacity-35 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute -right-6 bottom-10 size-48 rounded-full bg-[var(--pollen)] opacity-25 blur-3xl" />
+          <form onSubmit={submit} className="glass-subtle relative space-y-8 rounded-3xl p-6 md:p-8">
             <div className="grid gap-8 sm:grid-cols-2">
               <Field label="Name" name="name" value={form.name} onChange={update} placeholder="Your name" />
               <Field label="Email" name="email" type="email" value={form.email} onChange={update} placeholder="you@example.com" />

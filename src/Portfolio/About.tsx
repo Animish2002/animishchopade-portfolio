@@ -41,7 +41,7 @@ export default function About() {
                 className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0"
               />
             </motion.div>
-            <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-full bg-background/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em] backdrop-blur-md">
+            <div className="absolute inset-x-4 bottom-4 flex items-center justify-between glass rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em]">
               <span>{profile.name}</span>
               <span className="text-accent">Pune, IN</span>
             </div>

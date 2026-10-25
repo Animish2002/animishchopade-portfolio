@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useScroll,
@@ -35,7 +36,7 @@ export default function Hero() {
         mx.set((e.clientX - r.left) / r.width);
         my.set((e.clientY - r.top) / r.height);
       }}
-      className="relative flex min-h-svh flex-col overflow-hidden px-5 pb-10 pt-28 sm:px-10 md:pb-14"
+      className="relative flex min-h-svh flex-col overflow-hidden px-5 pb-28 pt-8 sm:px-10 md:pb-32 md:pt-10"
     >
       <motion.div
         aria-hidden
@@ -45,17 +46,12 @@ export default function Hero() {
       <DappledLight />
 
       <motion.div
-        className="relative z-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.18em] text-muted"
+        className="relative z-10 flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.18em] text-muted"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease, delay: 0.3 }}
       >
-        <span className="flex items-center gap-2.5">
-          <span className="relative flex size-2">
-                        <span className="relative inline-flex size-2 rounded-full bg-accent" />
-          </span>
-          Open to work
-        </span>
+        <Availability />
         <Clock />
       </motion.div>
 
@@ -98,7 +94,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm transition-colors hover:bg-accent-soft"
+              className="glass-subtle relative group inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm transition-colors hover:bg-accent-soft"
             >
               Say hi
               <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -107,6 +103,49 @@ export default function Hero() {
         </motion.div>
       </motion.div>
     </section>
+  );
+}
+
+const openTo = ["full-time roles", "freelance projects", "collaborations"];
+
+/** Frosted status badge: live dot plus a cycling list of what I'm open to. */
+function Availability() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((n) => (n + 1) % openTo.length), 2600);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <a
+      href="#contact"
+      className="glass-subtle group relative flex items-center gap-2.5 rounded-full py-1.5 pl-2.5 pr-3 font-sans text-[13px] normal-case tracking-normal text-foreground/90 transition-colors hover:text-foreground"
+    >
+      <span className="relative flex size-2.5 items-center justify-center">
+        <motion.span
+          className="absolute inset-0 rounded-full bg-accent"
+          animate={{ scale: [1, 2.6], opacity: [0.5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+        />
+        <span className="relative size-2 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" />
+      </span>
+      <span className="text-muted">Available for</span>
+      <span className="relative inline-flex h-5 min-w-[8.5rem] overflow-hidden">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.span
+            key={openTo[i]}
+            className="whitespace-nowrap"
+            initial={{ y: "100%", opacity: 0, filter: "blur(4px)" }}
+            animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+            exit={{ y: "-100%", opacity: 0, filter: "blur(4px)" }}
+            transition={{ duration: 0.5, ease }}
+          >
+            {openTo[i]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+      <ArrowUpRight className="size-3.5 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+    </a>
   );
 }
 
@@ -127,7 +166,7 @@ function Clock() {
   }, []);
 
   return (
-    <span>
+    <span className="hidden sm:inline">
       Pune, IN <span className="text-foreground">{time ?? "--:--"}</span> IST
     </span>
   );
