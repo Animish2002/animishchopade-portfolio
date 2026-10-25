@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "animishchopade-portfolio",
+  "account_id": "deaaf7f664dbc73849bfef93d8f21b2d",
+  "main": ".open-next/worker.js",
+  // `wrangler deploy` builds the Next.js app with OpenNext first, then uploads it
+  "build": {
+    "command": "npx opennextjs-cloudflare build"
+  },
+  "compatibility_date": "2025-12-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "animishchopade-portfolio"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  }
+}
