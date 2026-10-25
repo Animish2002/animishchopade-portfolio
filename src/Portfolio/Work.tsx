@@ -40,7 +40,7 @@ export default function Work() {
             key={f}
             onClick={() => setFilter(f)}
             className={cn(
-              "relative rounded-full border px-4 py-1.5 text-sm transition-colors",
+              "relative isolate rounded-full border px-4 py-1.5 text-sm transition-colors",
               filter === f ? "border-transparent text-accent-foreground" : "text-muted hover:text-foreground"
             )}
           >

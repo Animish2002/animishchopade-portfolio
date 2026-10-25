@@ -1,15 +1,34 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Reveal, SectionHeader } from "@/components/motion";
 import { Leaf } from "@/components/plant";
 import { career, skills } from "@/data/portfolio";
 
 export default function Career() {
   const ref = useRef<HTMLOListElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.7", "end 0.6"] });
+  // Roots (education) sit at the bottom, so the vine grows upward as you scroll.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.6", "end end"] });
   const grow = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
+  const budScale = useTransform(grow, [0.96, 1], [0, 1], { clamp: true });
+
+  // Where each leaf sits along the vine, measured from the roots (0) to the tip (1).
+  const [stops, setStops] = useState<number[]>([]);
+  useEffect(() => {
+    const list = ref.current;
+    if (!list) return;
+    const measure = () =>
+      setStops(
+        Array.from(list.querySelectorAll("li"), (li) =>
+          1 - (li.offsetTop + 12) / list.offsetHeight
+        )
+      );
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="career" className="px-5 py-28 sm:px-10 md:py-40">
@@ -18,12 +37,18 @@ export default function Career() {
       </SectionHeader>
 
       <ol ref={ref} className="relative">
-        {/* The vine: a stem that grows down as you scroll */}
+        {/* The vine: a stem that grows up from the roots as you scroll */}
         <span aria-hidden className="absolute bottom-0 left-0 top-0 w-px bg-line md:left-56" />
         <motion.span
           aria-hidden
-          className="absolute bottom-0 left-[-0.5px] top-0 w-[2px] origin-top rounded-full bg-accent md:left-[calc(14rem-0.5px)]"
+          className="absolute bottom-0 left-[-0.5px] top-0 w-[2px] origin-bottom rounded-full bg-stem md:left-[calc(14rem-0.5px)]"
           style={{ scaleY: grow }}
+        />
+        {/* Bud that opens at the tip once the vine reaches the present */}
+        <motion.span
+          aria-hidden
+          className="absolute -top-1.5 left-[-4.5px] size-2.5 rounded-full bg-leaf-light md:left-[calc(14rem-4.5px)]"
+          style={{ scale: budScale }}
         />
 
         {career.map((item, i) => (
@@ -35,8 +60,9 @@ export default function Career() {
             </div>
             <div className="relative pl-10 md:pl-16">
               <Leaf
-                flip={i % 2 === 1}
-                className="absolute left-0 top-3 w-9 -translate-y-1/2 md:w-11"
+                progress={grow}
+                at={stops[i] ?? 1}
+                className="absolute left-0 top-5 w-9 -translate-y-[80%] md:w-11"
               />
               <Reveal>
                 <h3 className="text-2xl font-medium tracking-tight md:text-3xl">
@@ -53,7 +79,7 @@ export default function Career() {
         <Reveal className="mb-10 font-mono text-xs uppercase tracking-[0.2em] text-muted">
           Toolkit
         </Reveal>
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-5">
           {Object.entries(skills).map(([group, items], i) => (
             <Reveal key={group} delay={i * 0.06}>
               <div className="mb-4 text-sm text-accent">{group}</div>

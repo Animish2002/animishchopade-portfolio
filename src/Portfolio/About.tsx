@@ -29,15 +29,15 @@ export default function About() {
         Rooted in <em className="font-serif font-normal text-accent">craft</em>
       </SectionHeader>
 
-      <div className="grid gap-14 md:grid-cols-12 md:gap-10">
-        <Reveal className="md:col-span-5">
+      <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
+        <Reveal className="md:max-w-md lg:col-span-5 lg:max-w-none">
           <div ref={photo} className="group relative aspect-[4/5] overflow-hidden rounded-3xl border">
             <motion.div style={{ y }} className="absolute -inset-[12%]">
               <Image
                 src={profile.photo}
                 alt="Animish Chopade"
                 fill
-                sizes="(min-width: 768px) 40vw, 100vw"
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 448px, 100vw"
                 className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0"
               />
             </motion.div>
@@ -48,7 +48,7 @@ export default function About() {
           </div>
         </Reveal>
 
-        <div className="md:col-span-7">
+        <div className="lg:col-span-7">
           <ScrollText
             className="text-2xl font-medium leading-snug tracking-tight md:text-4xl"
             text="I'm a full-stack developer who loves building user-friendly, efficient applications — bringing ideas to life on both the frontend and the backend with modern tools."

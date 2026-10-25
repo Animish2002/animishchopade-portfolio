@@ -1,11 +1,11 @@
 "use client";
 
 import { useId } from "react";
-import { motion } from "motion/react";
+import { motion, useMotionValue, useTransform, type MotionValue } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ease } from "@/components/motion";
 
-const LEAF = "M0 0 C 18 -22, 52 -24, 74 -4 C 52 14, 20 16, 0 0 Z";
+export const LEAF = "M0 0 C 18 -22, 52 -24, 74 -4 C 52 14, 20 16, 0 0 Z";
 const VEIN = "M4 -1 C 26 -6, 48 -7, 66 -4";
 
 // Where each leaf sprouts along the stem, its angle, and when it unfolds.
@@ -127,22 +127,45 @@ export function Sprout({
   );
 }
 
-/** A small leaf that unfurls when it scrolls into view — used as a timeline node. */
-export function Leaf({ className, flip = false }: { className?: string; flip?: boolean }) {
+/**
+ * A small leaf used as a timeline node. With `progress`, it unfurls once the
+ * vine's growth passes `at` (0 = roots, 1 = tip); otherwise when scrolled into view.
+ */
+export function Leaf({
+  className,
+  flip = false,
+  progress,
+  at = 0,
+}: {
+  className?: string;
+  flip?: boolean;
+  progress?: MotionValue<number>;
+  at?: number;
+}) {
   const id = useId();
+  const fallback = useMotionValue(1);
+  const scale = useTransform(progress ?? fallback, [at - 0.06, at], [0, 1], { clamp: true });
+  const rotate = useTransform(scale, [0, 1], [40, 0]);
+
+  const motionProps = progress
+    ? { style: { originX: 0.05, originY: 0.8, scale, rotate } }
+    : {
+        style: { originX: 0.05, originY: 0.8 },
+        initial: { scale: 0, rotate: 40 },
+        whileInView: { scale: 1, rotate: 0 },
+        viewport: { once: true, margin: "-20% 0px" },
+        transition: { type: "spring" as const, stiffness: 140, damping: 12 },
+      };
+
   return (
     <motion.svg
-      viewBox="-4 -26 82 44"
+      viewBox="-4 -48 82 60"
       aria-hidden
       className={cn("overflow-visible", className)}
-      initial={{ scale: 0, rotate: flip ? 60 : -60 }}
-      whileInView={{ scale: 1, rotate: 0 }}
-      viewport={{ once: true, margin: "-20% 0px" }}
-      transition={{ type: "spring", stiffness: 140, damping: 12 }}
-      style={{ originX: 0, originY: 0.6 }}
+      {...motionProps}
     >
       <LeafGradient id={id} />
-      <g transform={flip ? "scale(1 -1)" : undefined}>
+      <g transform={`rotate(-35)${flip ? " scale(1 -1)" : ""}`}>
         <LeafShape id={id} edge={2} />
       </g>
     </motion.svg>

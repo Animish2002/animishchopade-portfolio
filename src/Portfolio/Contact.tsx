@@ -65,8 +65,8 @@ export default function Contact() {
         <Sprout inView delay={0.4} className="hidden h-56 shrink-0 md:block lg:h-72" />
       </div>
 
-      <div className="mt-20 grid gap-16 md:grid-cols-12">
-        <div className="md:col-span-5">
+      <div className="mt-20 grid gap-16 lg:grid-cols-12">
+        <div className="lg:col-span-5">
           <Reveal>
             <div className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-muted">Email</div>
             <div className="flex items-center gap-3">
@@ -129,7 +129,7 @@ export default function Contact() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.15} className="md:col-span-6 md:col-start-7">
+        <Reveal delay={0.15} className="lg:col-span-6 lg:col-start-7">
           <form onSubmit={submit} className="space-y-8">
             <div className="grid gap-8 sm:grid-cols-2">
               <Field label="Name" name="name" value={form.name} onChange={update} placeholder="Your name" />

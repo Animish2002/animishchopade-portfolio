@@ -73,7 +73,7 @@ export default function Nav() {
               key={link.id}
               href={`#${link.id}`}
               className={cn(
-                "relative rounded-full px-3 py-1.5 text-[13px] transition-colors sm:px-4 sm:text-sm",
+                "relative isolate rounded-full px-3 py-1.5 text-[13px] transition-colors sm:px-4 sm:text-sm",
                 active === link.id ? "text-foreground" : "text-muted hover:text-foreground"
               )}
             >

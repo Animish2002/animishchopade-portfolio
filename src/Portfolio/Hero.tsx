@@ -10,7 +10,8 @@ import {
 } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { SplitText, ease } from "@/components/motion";
-import { Sprout } from "@/components/plant";
+import { HeroPlant } from "@/components/hero-plant";
+import { DappledLight } from "@/components/dappled-light";
 import { profile } from "@/data/portfolio";
 
 export default function Hero() {
@@ -38,13 +39,10 @@ export default function Hero() {
     >
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent opacity-[0.09] blur-[120px]"
+        className="pointer-events-none absolute size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent opacity-[0.05] blur-[140px]"
         style={{ left: gx, top: gy }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--line)_1px,transparent_1px),linear-gradient(to_bottom,var(--line)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
-      />
+      <DappledLight />
 
       <motion.div
         className="relative z-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.18em] text-muted"
@@ -54,8 +52,7 @@ export default function Hero() {
       >
         <span className="flex items-center gap-2.5">
           <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
-            <span className="relative inline-flex size-2 rounded-full bg-accent" />
+                        <span className="relative inline-flex size-2 rounded-full bg-accent" />
           </span>
           Open to work
         </span>
@@ -73,25 +70,25 @@ export default function Hero() {
               className="font-serif font-normal italic tracking-[-0.03em] text-accent"
             />
           </h1>
-          <Sprout delay={1} className="mb-[2%] h-[clamp(8rem,24vw,22rem)] shrink-0" />
+          <HeroPlant delay={1} className="mb-[1%] h-[clamp(9rem,26vw,24rem)] shrink-0" />
         </div>
 
         <motion.div
-          className="mt-10 grid gap-8 border-t pt-8 md:grid-cols-12 md:items-end"
+          className="mt-10 grid gap-8 border-t pt-8 sm:grid-cols-2 sm:items-end lg:grid-cols-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease, delay: 1.2 }}
         >
-          <p className="max-w-md text-lg leading-relaxed text-muted md:col-span-6 md:text-xl">
+          <p className="max-w-md text-lg leading-relaxed text-muted sm:col-span-2 md:text-xl lg:col-span-6">
             <span className="text-foreground">Full-stack developer</span> building fast, thoughtful
             web products — from the first pixel to the database.
           </p>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted md:col-span-3">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted lg:col-span-3">
             Currently
             <br />
             <span className="text-foreground">{profile.current}</span>
           </p>
-          <div className="flex gap-3 md:col-span-3 md:justify-end">
+          <div className="flex gap-3 whitespace-nowrap sm:justify-end lg:col-span-3">
             <a
               href="#work"
               className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-transform hover:scale-[1.03] active:scale-95"
