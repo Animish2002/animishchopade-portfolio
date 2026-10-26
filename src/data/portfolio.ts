@@ -146,20 +146,13 @@ export const services = [
   },
 ];
 
+// Oldest first: the career vine grows down from here.
 export const career = [
   {
-    period: "Oct 2025 — Present",
-    role: "Software Developer",
-    org: "Qnopy India",
-    description:
-      "Designing and developing scalable web applications — building features end-to-end with cross-functional teams and shipping production-quality code.",
-  },
-  {
-    period: "Sep 2024 — Oct 2025",
-    role: "Full Stack Developer",
-    org: "Freelance",
-    description:
-      "Built SaaS products and marketing websites for clients at The Fortune Club with React, Next.js, Node.js and Supabase — CRMs, landing pages and LMS integrations.",
+    period: "2020 — 2024",
+    role: "B.Tech",
+    org: "Vishwakarma Institute of Information Technology, Pune",
+    description: "Bachelor of Technology.",
   },
   {
     period: "Feb 2024 — Aug 2024",
@@ -169,10 +162,18 @@ export const career = [
       "Delivered responsive UIs and improved performance through lazy loading, code splitting and REST API integrations.",
   },
   {
-    period: "2020 — 2024",
-    role: "B.Tech",
-    org: "Vishwakarma Institute of Information Technology, Pune",
-    description: "Bachelor of Technology.",
+    period: "Sep 2024 — Oct 2025",
+    role: "Full Stack Developer",
+    org: "Freelance",
+    description:
+      "Built SaaS products and marketing websites for clients at The Fortune Club with React, Next.js, Node.js and Supabase — CRMs, landing pages and LMS integrations.",
+  },
+  {
+    period: "Oct 2025 — Present",
+    role: "Software Developer",
+    org: "Qnopy India",
+    description:
+      "Designing and developing scalable web applications — building features end-to-end with cross-functional teams and shipping production-quality code.",
   },
 ];
 

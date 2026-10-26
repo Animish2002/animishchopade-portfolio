@@ -18,6 +18,9 @@ const angleAt = (a: Pt, b: Pt, c: Pt, t: number) => {
   return (Math.atan2(dy, dx) * 180) / Math.PI;
 };
 
+// Rounded so server and client agree; their trig can differ in the last digits.
+const round = (n: number) => Math.round(n * 100) / 100;
+
 // Deterministic jitter so server and client render the same branch.
 const jitter = (n: number) => {
   const x = Math.sin(n * 12.9898) * 43758.5453;
@@ -31,11 +34,11 @@ function makeBranch(from: Pt, bend: Pt, to: Pt, count: number, seed: number) {
     const [x, y] = at(from, bend, to, t);
     const side = i % 2 === 0 ? 1 : -1;
     return {
-      x,
-      y,
-      rotate: angleAt(from, bend, to, t) + side * (38 + jitter(seed + i) * 22),
-      scale: 1.2 + jitter(seed + i * 3) * 0.7 + t * 0.3,
-      delay: -jitter(seed + i * 7) * 4,
+      x: round(x),
+      y: round(y),
+      rotate: round(angleAt(from, bend, to, t) + side * (38 + jitter(seed + i) * 22)),
+      scale: round(1.2 + jitter(seed + i * 3) * 0.7 + t * 0.3),
+      delay: round(-jitter(seed + i * 7) * 4),
     };
   });
 }

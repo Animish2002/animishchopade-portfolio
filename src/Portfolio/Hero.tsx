@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  AnimatePresence,
   motion,
   useMotionValue,
   useScroll,
@@ -11,8 +10,9 @@ import {
 } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { SplitText, ease } from "@/components/motion";
-import { HeroPlant } from "@/components/hero-plant";
+import { Sunflower } from "@/components/sunflower";
 import { DappledLight } from "@/components/dappled-light";
+import { Lightning } from "@/components/lightning";
 import { profile } from "@/data/portfolio";
 
 export default function Hero() {
@@ -44,6 +44,7 @@ export default function Hero() {
         style={{ left: gx, top: gy }}
       />
       <DappledLight />
+      <Lightning />
 
       <motion.div
         className="relative z-10 flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.18em] text-muted"
@@ -66,7 +67,7 @@ export default function Hero() {
               className="font-serif font-normal italic tracking-[-0.03em] text-accent"
             />
           </h1>
-          <HeroPlant delay={1} className="mb-[1%] h-[clamp(9rem,26vw,24rem)] shrink-0" />
+          <Sunflower delay={1} className="mb-[1%] h-[clamp(9rem,26vw,24rem)] shrink-0" />
         </div>
 
         <motion.div
@@ -108,41 +109,48 @@ export default function Hero() {
 
 const openTo = ["full-time roles", "freelance projects", "collaborations"];
 
-/** Frosted status badge: live dot plus a cycling list of what I'm open to. */
+/**
+ * Frosted status badge: live dot plus a cycling list of what I'm open to.
+ * Every word sits in the same grid cell, so the badge is always as wide as
+ * the longest one and never resizes; only transform/opacity animate.
+ */
 function Availability() {
   const [i, setI] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setI((n) => (n + 1) % openTo.length), 2600);
     return () => clearInterval(id);
   }, []);
+  const prev = (i - 1 + openTo.length) % openTo.length;
 
   return (
     <a
       href="#contact"
-      className="glass-subtle group relative flex items-center gap-2.5 rounded-full py-1.5 pl-2.5 pr-3 font-sans text-[13px] normal-case tracking-normal text-foreground/90 transition-colors hover:text-foreground"
+      className="glass-subtle glass-static group relative flex items-center gap-2.5 rounded-full py-1.5 pl-2.5 pr-3 font-sans text-[13px] normal-case tracking-normal text-foreground/90 transition-colors hover:text-foreground"
     >
       <span className="relative flex size-2.5 items-center justify-center">
-        <motion.span
-          className="absolute inset-0 rounded-full bg-accent"
-          animate={{ scale: [1, 2.6], opacity: [0.5, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-        />
+        <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-40 [animation-duration:1.8s]" />
         <span className="relative size-2 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" />
       </span>
       <span className="text-muted">Available for</span>
-      <span className="relative inline-flex h-5 min-w-[8.5rem] overflow-hidden">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={openTo[i]}
-            className="whitespace-nowrap"
-            initial={{ y: "100%", opacity: 0, filter: "blur(4px)" }}
-            animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-            exit={{ y: "-100%", opacity: 0, filter: "blur(4px)" }}
-            transition={{ duration: 0.5, ease }}
-          >
-            {openTo[i]}
-          </motion.span>
-        </AnimatePresence>
+      <span className="grid h-5 overflow-hidden">
+        {openTo.map((label, n) => {
+          const state = n === i ? "in" : n === prev ? "out" : "wait";
+          return (
+            <motion.span
+              key={label}
+              aria-hidden={state !== "in"}
+              className="col-start-1 row-start-1 whitespace-nowrap leading-5"
+              initial={false}
+              animate={{
+                y: state === "in" ? "0%" : state === "out" ? "-100%" : "100%",
+                opacity: state === "in" ? 1 : 0,
+              }}
+              transition={state === "wait" ? { duration: 0 } : { duration: 0.5, ease }}
+            >
+              {label}
+            </motion.span>
+          );
+        })}
       </span>
       <ArrowUpRight className="size-3.5 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
     </a>

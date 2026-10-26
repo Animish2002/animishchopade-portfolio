@@ -62,9 +62,17 @@
   --sun-shade: oklch(0.42 0.04 130 / 0.16);
   --sun-falloff: oklch(0.2 0.02 100 / 0.05);
   --ink: oklch(0.27 0.03 130);
-  --pot: oklch(0.64 0.11 45);
-  --pot-light: oklch(0.72 0.1 50);
-  --petal: oklch(0.98 0.015 90);
+  --petal: oklch(0.86 0.16 95);
+  --petal-dark: oklch(0.76 0.16 72);
+  --face: oklch(0.62 0.13 62);
+  --face-light: oklch(0.72 0.13 72);
+  --face-dark: oklch(0.42 0.09 50);
+  --sun-core: oklch(0.9 0.17 98);
+  --bolt-core: oklch(1 0 0);
+  --bolt-glow: oklch(0.58 0.17 278);
+  --bolt-blend: source-over;
+  --flash: oklch(0.97 0.025 255);
+  --flash-max: 0.55;
   --pollen: oklch(0.82 0.13 85);
   --blush: oklch(0.7 0.12 20);
   --glass-top: oklch(1 0 0 / 0.62);
@@ -98,9 +106,17 @@
   --sun-shade: oklch(0.165 0.005 95 / 0.85);
   --sun-falloff: transparent;
   --ink: oklch(0.17 0.02 130);
-  --pot: oklch(0.6 0.1 45);
-  --pot-light: oklch(0.68 0.09 50);
-  --petal: oklch(0.94 0.02 90);
+  --petal: oklch(0.82 0.14 92);
+  --petal-dark: oklch(0.7 0.14 70);
+  --face: oklch(0.56 0.11 60);
+  --face-light: oklch(0.66 0.12 70);
+  --face-dark: oklch(0.36 0.07 50);
+  --sun-core: oklch(0.9 0.16 98);
+  --bolt-core: oklch(0.99 0.02 260);
+  --bolt-glow: oklch(0.78 0.13 275);
+  --bolt-blend: lighter;
+  --flash: oklch(0.86 0.06 260);
+  --flash-max: 0.24;
   --pollen: oklch(0.82 0.13 85);
   --blush: oklch(0.68 0.11 20);
   --glass-top: oklch(0.34 0.006 95 / 0.32);
@@ -234,46 +250,88 @@
   }
 }
 
-/* Hero plant: whip-like bend per stem segment, fluttering leaves, spinning bloom */
-.plant-lean {
+/* Hero sunflower: whole-plant sway, bobbing head, fluttering leaves */
+.sf-lean {
   transform-box: view-box;
-  transform-origin: 120px 258px;
+  transform-origin: 120px 318px;
   rotate: var(--lean, 0deg);
 }
-.plant-bend {
+.sf-sway {
   transform-box: view-box;
-  animation: plant-bend 3.8s ease-in-out infinite alternate;
+  transform-origin: 120px 318px;
+  animation: sf-sway 2.4s ease-in-out infinite alternate;
 }
-.plant-flutter {
+.sf-head {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: sf-head 1.2s ease-in-out infinite alternate;
+}
+.sf-flutter {
   transform-box: fill-box;
   transform-origin: 0% 60%;
-  animation: plant-flutter 2.4s ease-in-out infinite alternate;
+  animation: sf-flutter 2.4s ease-in-out infinite alternate;
 }
-.plant-spin {
+.sf-spin {
   transform-box: fill-box;
   transform-origin: center;
-  animation: plant-spin 24s linear infinite;
+  animation: sf-spin 6s linear infinite;
 }
-@keyframes plant-bend {
+@keyframes sf-sway {
   from {
-    rotate: calc(var(--sway) * -1);
+    rotate: -3deg;
   }
   to {
-    rotate: var(--sway);
+    rotate: 3deg;
   }
 }
-@keyframes plant-flutter {
+@keyframes sf-head {
   from {
     rotate: -6deg;
+    translate: -2px 1px;
   }
   to {
-    rotate: 7deg;
+    rotate: 6deg;
+    translate: 2px -1px;
   }
 }
-@keyframes plant-spin {
+@keyframes sf-flutter {
+  from {
+    rotate: -5deg;
+  }
+  to {
+    rotate: 6deg;
+  }
+}
+@keyframes sf-spin {
   to {
     rotate: 360deg;
   }
+}
+
+/* Lightning: sky flash centred on the strike, driven from JS */
+.lightning-flash {
+  background: radial-gradient(
+    ellipse var(--fr, 65%) 90% at var(--fx, 70%) 0%,
+    var(--flash),
+    color-mix(in oklch, var(--flash) 35%, transparent) 60%,
+    transparent
+  );
+  will-change: opacity;
+}
+
+/* Glass without backdrop-filter, for small badges that animate inside:
+   a live backdrop blur re-composites every frame and shimmers. */
+.glass-subtle.glass-static {
+  backdrop-filter: none;
+}
+
+/* Custom cursor (mouse only, toggled from JS): hide the native one, keep the caret in fields */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+.custom-cursor :is(input, textarea, [contenteditable="true"]) {
+  cursor: text !important;
 }
 
 .mask-fade-x {
@@ -286,9 +344,10 @@
   .dl-light,
   .dl-sway,
   .dl-flutter,
-  .plant-bend,
-  .plant-flutter,
-  .plant-spin {
+  .sf-sway,
+  .sf-head,
+  .sf-flutter,
+  .sf-spin {
     animation: none;
   }
 }

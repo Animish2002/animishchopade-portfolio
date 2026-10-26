@@ -81,6 +81,7 @@ export default function Work() {
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cursor="View"
                 className="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 gap-y-4 py-6 md:grid-cols-[4rem_1fr_10rem_auto] md:py-8"
               >
                 <div className="relative col-span-3 aspect-[16/9] overflow-hidden rounded-xl border md:hidden">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -70,8 +70,8 @@ export default function Nav() {
         transition={{ duration: 0.8, ease, delay: 1.4 }}
       >
         <div
-          onMouseMove={(e) => mouseX.set(e.clientX)}
-          onMouseLeave={() => mouseX.set(Infinity)}
+          onPointerMove={(e) => e.pointerType === "mouse" && mouseX.set(e.clientX)}
+          onPointerLeave={() => mouseX.set(Infinity)}
           className="glass relative flex h-[52px] items-end gap-1 rounded-full px-1.5 pb-1.5"
         >
           {links.map((link) => (
@@ -102,40 +102,46 @@ export default function Nav() {
   );
 }
 
+/**
+ * Grows an item as the cursor nears it. Distance is measured from where the
+ * item sits at rest, not where it is now: magnifying shifts every item, and
+ * measuring live positions feeds that back in and makes the dock jitter.
+ */
 function useMagnify(mouseX: MotionValue<number>) {
   const ref = useRef<HTMLElement>(null);
-  const distance = useTransform(mouseX, (x) => {
-    const box = ref.current?.getBoundingClientRect();
-    return box ? x - (box.left + box.width / 2) : Infinity;
-  });
-  const size = useSpring(useTransform(distance, [-120, 0, 120], [40, 52, 40]), {
-    stiffness: 260,
-    damping: 18,
+  const center = useRef<number | null>(null);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (mouseX.get() !== Infinity || !ref.current) return;
+      const box = ref.current.getBoundingClientRect();
+      center.current = box.width ? box.left + box.width / 2 : null;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [mouseX]);
+
+  const distance = useTransform(mouseX, (x) => (center.current === null ? Infinity : x - center.current));
+  const size = useSpring(useTransform(distance, [-130, 0, 130], [40, 54, 40]), {
+    stiffness: 320,
+    damping: 30,
     mass: 0.2,
   });
   return { ref, size };
 }
 
-function Tooltip({ show, label }: { show: boolean; label: string }) {
+/** Pure CSS so hovering never re-renders the item (and its shared layout indicator). */
+function Tooltip({ label }: { label: string }) {
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.span
-          initial={{ opacity: 0, y: 6, x: "-50%" }}
-          animate={{ opacity: 1, y: 0, x: "-50%" }}
-          exit={{ opacity: 0, y: 4, x: "-50%" }}
-          transition={{ duration: 0.18 }}
-          className="glass pointer-events-none absolute -top-10 left-1/2 whitespace-nowrap rounded-full px-3 py-1 text-xs"
-        >
-          {label}
-        </motion.span>
-      )}
-    </AnimatePresence>
+    <span className="glass pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 translate-y-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs text-foreground opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+      {label}
+    </span>
   );
 }
 
 const itemClass =
-  "relative flex aspect-square items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/[0.06] hover:text-foreground";
+  "group relative flex aspect-square shrink-0 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:bg-foreground/[0.06] hover:text-foreground";
 
 function DockItem({
   mouseX,
@@ -155,7 +161,6 @@ function DockItem({
   children: React.ReactNode;
 }) {
   const { ref, size } = useMagnify(mouseX);
-  const [hover, setHover] = useState(false);
 
   return (
     <motion.a
@@ -165,12 +170,10 @@ function DockItem({
       aria-current={active ? "location" : undefined}
       {...(external && { target: "_blank", rel: "noopener noreferrer" })}
       style={{ width: size }}
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
       whileTap={{ scale: 0.9 }}
       className={cn(itemClass, "isolate", active && "text-foreground", className)}
     >
-      <Tooltip show={hover} label={label} />
+      <Tooltip label={label} />
       {active && (
         <motion.span
           layoutId="dock-active"
@@ -186,7 +189,6 @@ function DockItem({
 function ThemeItem({ mouseX }: { mouseX: MotionValue<number> }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [hover, setHover] = useState(false);
   const { ref, size } = useMagnify(mouseX);
   useEffect(() => setMounted(true), []);
   const dark = resolvedTheme === "dark";
@@ -197,12 +199,11 @@ function ThemeItem({ mouseX }: { mouseX: MotionValue<number> }) {
       onClick={() => setTheme(dark ? "light" : "dark")}
       aria-label="Toggle theme"
       style={{ width: size }}
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
       whileTap={{ scale: 0.9 }}
       className={cn(itemClass, "overflow-visible")}
     >
-      <Tooltip show={hover} label={dark ? "Light mode" : "Dark mode"} />
+      {/* the theme is only known after mount; keep server and client in agreement */}
+      <Tooltip label={mounted ? (dark ? "Light mode" : "Dark mode") : "Toggle theme"} />
       <AnimatePresence mode="wait" initial={false}>
         {mounted && (
           <motion.span
