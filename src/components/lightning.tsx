@@ -123,59 +123,62 @@ export function Lightning({ className }: { className?: string }) {
 
       if (!distant) window.dispatchEvent(new CustomEvent("hero:lightning"));
 
+      // The bolt is drawn once; each frame only fades the canvas on the GPU.
+      ctx.clearRect(0, 0, w, h);
+      if (bolt.length) {
+        ctx.globalCompositeOperation = blend;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        for (const c of bolt) {
+          const n = c.pts.length - 1;
+          const passes = [
+            { color: glow, lw: 14, a: 0.08, blur: 0 },
+            { color: glow, lw: 4.5, a: 0.4, blur: 18 },
+            { color: core, lw: 1.6, a: 1, blur: 0 },
+          ];
+          for (const p of passes) {
+            ctx.strokeStyle = p.color;
+            ctx.shadowColor = p.blur ? glow : "transparent";
+            ctx.shadowBlur = p.blur;
+            ctx.lineWidth = p.lw * c.width;
+            if (!c.taper) {
+              ctx.globalAlpha = Math.min(1, p.a * c.alpha);
+              ctx.beginPath();
+              ctx.moveTo(c.pts[0].x, c.pts[0].y);
+              for (let i = 1; i <= n; i++) ctx.lineTo(c.pts[i].x, c.pts[i].y);
+              ctx.stroke();
+            } else {
+              // forks thin out and fade toward their tips
+              for (let i = 1; i <= n; i++) {
+                const k = 1 - i / n;
+                ctx.globalAlpha = Math.min(1, p.a * c.alpha * k);
+                ctx.lineWidth = p.lw * c.width * (0.4 + 0.6 * k);
+                ctx.beginPath();
+                ctx.moveTo(c.pts[i - 1].x, c.pts[i - 1].y);
+                ctx.lineTo(c.pts[i].x, c.pts[i].y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+      }
+
       const frame = (now: number) => {
         const t = now - t0;
         const sky = intensity(pulses, t, 70);
         // the channel itself lingers a little longer than the sky flash
         const glowI = intensity(pulses, t, 110);
         flash.style.opacity = String(sky * flashPeak);
-
-        ctx.clearRect(0, 0, w, h);
-        if (bolt.length && glowI > 0.01) {
-          ctx.globalCompositeOperation = blend;
-          ctx.lineCap = "round";
-          ctx.lineJoin = "round";
-          for (const c of bolt) {
-            const n = c.pts.length - 1;
-            const passes = [
-              { color: glow, lw: 14, a: 0.08, blur: 0 },
-              { color: glow, lw: 4.5, a: 0.4, blur: 18 },
-              { color: core, lw: 1.6, a: 1, blur: 0 },
-            ];
-            for (const p of passes) {
-              ctx.strokeStyle = p.color;
-              ctx.shadowColor = p.blur ? glow : "transparent";
-              ctx.shadowBlur = p.blur;
-              ctx.lineWidth = p.lw * c.width;
-              if (!c.taper) {
-                ctx.globalAlpha = Math.min(1, p.a * c.alpha * glowI);
-                ctx.beginPath();
-                ctx.moveTo(c.pts[0].x, c.pts[0].y);
-                for (let i = 1; i <= n; i++) ctx.lineTo(c.pts[i].x, c.pts[i].y);
-                ctx.stroke();
-              } else {
-                // forks thin out and fade toward their tips
-                for (let i = 1; i <= n; i++) {
-                  const k = 1 - i / n;
-                  ctx.globalAlpha = Math.min(1, p.a * c.alpha * glowI * k);
-                  ctx.lineWidth = p.lw * c.width * (0.4 + 0.6 * k);
-                  ctx.beginPath();
-                  ctx.moveTo(c.pts[i - 1].x, c.pts[i - 1].y);
-                  ctx.lineTo(c.pts[i].x, c.pts[i].y);
-                  ctx.stroke();
-                }
-              }
-            }
-          }
-          ctx.globalAlpha = 1;
-          ctx.shadowBlur = 0;
-        }
+        canvas.style.opacity = String(glowI);
 
         const last = pulses[pulses.length - 1].at;
         if (t < last + 600) raf = requestAnimationFrame(frame);
         else {
           ctx.clearRect(0, 0, w, h);
           flash.style.opacity = "0";
+          canvas.style.opacity = "0";
         }
       };
       cancelAnimationFrame(raf);
@@ -207,7 +210,7 @@ export function Lightning({ className }: { className?: string }) {
       <canvas
         ref={canvasRef}
         aria-hidden
-        className={cn("pointer-events-none absolute inset-0 size-full", className)}
+        className={cn("pointer-events-none absolute inset-0 size-full opacity-0 will-change-[opacity]", className)}
       />
       <div
         ref={flashRef}

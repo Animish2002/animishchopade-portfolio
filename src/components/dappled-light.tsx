@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useId, useRef } from "react";
 import { useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 import { LEAF } from "@/components/plant";
@@ -38,7 +38,6 @@ function makeBranch(from: Pt, bend: Pt, to: Pt, count: number, seed: number) {
       y: round(y),
       rotate: round(angleAt(from, bend, to, t) + side * (38 + jitter(seed + i) * 22)),
       scale: round(1.2 + jitter(seed + i * 3) * 0.7 + t * 0.3),
-      delay: round(-jitter(seed + i * 7) * 4),
     };
   });
 }
@@ -50,9 +49,12 @@ const branches = [
 
 /**
  * Sunlight through a window falling on the wall, with the soft shadows of
- * swaying leaves passing across it. Pure CSS/SVG; animation pauses off-screen.
+ * swaying leaves passing across it. Each branch is its own svg, blurred inside
+ * the svg, so the blur is painted once and the sway only moves a GPU layer.
+ * Pure CSS/SVG; animation pauses off-screen.
  */
 export function DappledLight({ className }: { className?: string }) {
+  const blur = useId();
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, { margin: "100px" });
 
@@ -74,17 +76,21 @@ export function DappledLight({ className }: { className?: string }) {
           </div>
         </div>
         {/* Shadows: leaves between the window and the wall, only slightly out of focus */}
-        <svg
-          viewBox="0 0 900 600"
-          preserveAspectRatio="xMidYMid slice"
-          className="dl-shadow absolute inset-0 size-full"
-        >
-          {branches.map((b, bi) => (
-            <g
-              key={bi}
-              className="dl-sway"
-              style={{ transformOrigin: `${b.from[0]}px ${b.from[1]}px`, animationDelay: b.delay }}
-            >
+        {branches.map((b, bi) => (
+          <svg
+            key={bi}
+            viewBox="0 0 900 600"
+            preserveAspectRatio="xMidYMid slice"
+            className="dl-sway absolute inset-0 size-full overflow-visible"
+            style={{
+              transformOrigin: `${round((b.from[0] / 900) * 100)}% ${round((b.from[1] / 600) * 100)}%`,
+              animationDelay: b.delay,
+            }}
+          >
+            <filter id={`${blur}-${bi}`} x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="5" />
+            </filter>
+            <g filter={`url(#${blur}-${bi})`}>
               <path
                 d={`M${b.from[0]} ${b.from[1]} Q${b.bend[0]} ${b.bend[1]} ${b.to[0]} ${b.to[1]}`}
                 stroke="var(--sun-shade)"
@@ -93,18 +99,16 @@ export function DappledLight({ className }: { className?: string }) {
                 fill="none"
               />
               {b.leaves.map((l, li) => (
-                <g key={li} transform={`translate(${l.x} ${l.y}) rotate(${l.rotate}) scale(${l.scale})`}>
-                  <path
-                    d={LEAF}
-                    className="dl-flutter"
-                    fill="var(--sun-shade)"
-                    style={{ animationDelay: `${l.delay}s` }}
-                  />
-                </g>
+                <path
+                  key={li}
+                  d={LEAF}
+                  fill="var(--sun-shade)"
+                  transform={`translate(${l.x} ${l.y}) rotate(${l.rotate}) scale(${l.scale})`}
+                />
               ))}
             </g>
-          ))}
-        </svg>
+          </svg>
+        ))}
       </div>
     </div>
   );

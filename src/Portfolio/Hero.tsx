@@ -38,11 +38,14 @@ export default function Hero() {
       }}
       className="relative flex min-h-svh flex-col overflow-hidden px-5 pb-28 pt-8 sm:px-10 md:pb-32 md:pt-10"
     >
+      {/* A gradient on a layer the size of the hero: moving it never repaints. */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent opacity-[0.05] blur-[140px]"
-        style={{ left: gx, top: gy }}
-      />
+        className="pointer-events-none absolute inset-0 will-change-transform"
+        style={{ x: gx, y: gy }}
+      >
+        <div className="absolute left-0 top-0 size-[60rem] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,var(--accent)_25%,transparent)] opacity-[0.05]" />
+      </motion.div>
       <DappledLight />
       <Lightning />
 
