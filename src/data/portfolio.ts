@@ -25,7 +25,7 @@ export type GallerySlide =
   | { type: "video"; src: string; poster: string; at: number };
 
 export const gallery: GallerySlide[] = [
-  { type: "image", src: profile.photo,  at:  6.8   },
+ 
   { type: "image", src: `${IMG}/v1793561185/1000151562_on3ema.jpg`, at: 0 },
   { type: "video", src: `${VID}/v1793561150/1000148469_shgrfd.mp4`, poster: `${VID}/so_0,w_1000/v1793561150/1000148469_shgrfd.jpg`, at: 4.5 },
   { type: "image", src: `${IMG}/v1793561129/1000144779_zh0sc0.png`, at: 2.3},
@@ -33,6 +33,7 @@ export const gallery: GallerySlide[] = [
   { type: "image", src: `${IMG}/v1793561117/1000132684.jpg_ddtanl.jpg`, at: 11.3 },
   { type: "image", src: `${IMG}/v1793561119/1000123377_y0zsl4.jpg`, at: 13.5 },
   { type: "image", src: `${IMG}/v1793561117/1000149059.jpg_dp6bgo.jpg`, at: 15.8 },
+   { type: "image", src: profile.photo,  at:  6.8   },
 ];
 
 export const audio = {
