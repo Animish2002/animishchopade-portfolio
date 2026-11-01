@@ -19,11 +19,14 @@ import {
   Moon,
   Sprout,
   Sun,
+  Volume2,
+  VolumeX,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ease } from "@/components/motion";
+import { useSiteAudio } from "@/components/audio-provider";
 
 const links: { id: string; label: string; icon: LucideIcon }[] = [
   { id: "top", label: "Home", icon: House },
@@ -72,7 +75,7 @@ export default function Nav() {
         <div
           onPointerMove={(e) => e.pointerType === "mouse" && mouseX.set(e.clientX)}
           onPointerLeave={() => mouseX.set(Infinity)}
-          className="glass relative flex h-[52px] items-end gap-1 rounded-full px-1.5 pb-1.5"
+          className="glass relative flex items-end gap-1 rounded-full p-1.5"
         >
           {links.map((link) => (
             <DockItem
@@ -95,6 +98,7 @@ export default function Nav() {
           >
             <Github className="size-[42%]" strokeWidth={1.6} />
           </DockItem>
+          <MusicItem mouseX={mouseX} />
           <ThemeItem mouseX={mouseX} />
         </div>
       </motion.nav>
@@ -183,6 +187,25 @@ function DockItem({
       )}
       {children}
     </motion.a>
+  );
+}
+
+function MusicItem({ mouseX }: { mouseX: MotionValue<number> }) {
+  const { ambientOn, toggleAmbient } = useSiteAudio();
+  const { ref, size } = useMagnify(mouseX);
+  return (
+    <motion.button
+      ref={ref as React.RefObject<HTMLButtonElement>}
+      onClick={toggleAmbient}
+      aria-label={ambientOn ? "Mute music" : "Play music"}
+      aria-pressed={ambientOn}
+      style={{ width: size }}
+      whileTap={{ scale: 0.9 }}
+      className={cn(itemClass, "overflow-visible", ambientOn && "text-accent")}
+    >
+      <Tooltip label={ambientOn ? "Mute music" : "Play music"} />
+      {ambientOn ? <Volume2 className="size-[42%]" strokeWidth={1.6} /> : <VolumeX className="size-[42%]" strokeWidth={1.6} />}
+    </motion.button>
   );
 }
 

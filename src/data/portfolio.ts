@@ -11,6 +11,35 @@ export const profile = {
   current: "Software Developer @ Qnopy India",
 };
 
+/**
+ * About-section slideshow. `at` is the second of the meme song
+ * (public/audio/wow-kya-ladka-hai.mp3) at which that slide appears.
+ * Tune these numbers to match the beats of your audio clip.
+ * Without the audio, slides auto-advance every few seconds instead.
+ */
+const IMG = "https://res.cloudinary.com/dkv3bx51z/image/upload/f_auto,q_auto,w_1000";
+const VID = "https://res.cloudinary.com/dkv3bx51z/video/upload";
+
+export type GallerySlide =
+  | { type: "image"; src: string; at: number }
+  | { type: "video"; src: string; poster: string; at: number };
+
+export const gallery: GallerySlide[] = [
+  { type: "image", src: profile.photo, at: 0 },
+  { type: "image", src: `${IMG}/v1793561185/1000151562_on3ema.jpg`, at: 2.3 },
+  { type: "video", src: `${VID}/v1793561150/1000148469_shgrfd.mp4`, poster: `${VID}/so_0,w_1000/v1793561150/1000148469_shgrfd.jpg`, at: 4.5 },
+  { type: "image", src: `${IMG}/v1793561129/1000144779_zh0sc0.png`, at: 6.8 },
+  { type: "image", src: `${IMG}/v1793561126/1000123334.jpg_vxzme9.jpg`, at: 9 },
+  { type: "image", src: `${IMG}/v1793561117/1000132684.jpg_ddtanl.jpg`, at: 11.3 },
+  { type: "image", src: `${IMG}/v1793561119/1000123377_y0zsl4.jpg`, at: 13.5 },
+  { type: "image", src: `${IMG}/v1793561117/1000149059.jpg_dp6bgo.jpg`, at: 15.8 },
+];
+
+export const audio = {
+  meme: "/audio/wow-kya-ladka-hai.mp3",
+  ambient: "/audio/ambient.mp3",
+};
+
 export const socials = [
   { label: "GitHub", href: "https://github.com/Animish2002" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/animish-chopade" },
@@ -199,3 +228,16 @@ export const marquee = [
   "Drizzle ORM",
   "AWS",
 ];
+
+/**
+ * "Don't leave me" pop-up shown when a visitor comes back to the tab.
+ * Put the Michael Scott "No, God, please, no" GIF URL in `gif` (a Cloudinary
+ * link, or a file in /public like "/michael.gif"). Leave empty for text only.
+ */
+export const comeBack = {
+  gif: "/michael-no.gif",
+  awayTitle: "Oh, so now you're ignoring me? 🙃",
+  headline: "Oh, so you just LEAVE? Rude!",
+  subline: "(I was doing so well alone. Anyway, I bet you haven't even seen my best project.)",
+  button: "Ugh, fine. I'm back.",
+};

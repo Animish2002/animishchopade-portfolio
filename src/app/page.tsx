@@ -6,11 +6,13 @@ import About from "@/Portfolio/About";
 import Career from "@/Portfolio/Career";
 import Contact from "@/Portfolio/Contact";
 import Footer from "@/Portfolio/Footer";
+import { ComeBack } from "@/components/come-back";
 
 export default function Home() {
   return (
     <>
       <Nav />
+      <ComeBack />
       <main className="mx-auto max-w-[96rem]">
         <Hero />
         <Marquee />

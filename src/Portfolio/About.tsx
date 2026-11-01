@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import {
   animate,
-  motion,
   useInView,
-  useScroll,
-  useTransform,
 } from "motion/react";
+import { PhotoReel } from "@/components/photo-reel";
 import { Reveal, ScrollText, SectionHeader } from "@/components/motion";
 import { profile, projects, services } from "@/data/portfolio";
 
@@ -19,10 +16,6 @@ const stats = [
 ];
 
 export default function About() {
-  const photo = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: photo, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-
   return (
     <section id="about" className="px-5 py-28 sm:px-10 md:py-40">
       <SectionHeader index="02" eyebrow="About">
@@ -31,16 +24,8 @@ export default function About() {
 
       <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
         <Reveal className="md:max-w-md lg:col-span-5 lg:max-w-none">
-          <div ref={photo} className="group relative aspect-[4/5] overflow-hidden rounded-3xl border">
-            <motion.div style={{ y }} className="absolute -inset-[12%]">
-              <Image
-                src={profile.photo}
-                alt="Animish Chopade"
-                fill
-                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 448px, 100vw"
-                className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0"
-              />
-            </motion.div>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border">
+            <PhotoReel />
             <div className="absolute inset-x-4 bottom-4 flex items-center justify-between glass rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em]">
               <span>{profile.name}</span>
               <span className="text-accent">Pune, IN</span>

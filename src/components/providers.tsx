@@ -5,6 +5,7 @@ import { ReactLenis } from "lenis/react";
 import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Cursor } from "@/components/cursor";
+import { AudioProvider } from "@/components/audio-provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [smooth, setSmooth] = useState(false);
@@ -23,7 +24,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     >
       <MotionConfig reducedMotion="user">
         {smooth && <ReactLenis root options={{ lerp: 0.1, anchors: true }} />}
-        {children}
+        <AudioProvider>
+          {children}
+        </AudioProvider>
         <Cursor />
       </MotionConfig>
     </ThemeProvider>
